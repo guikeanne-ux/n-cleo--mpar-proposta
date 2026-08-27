@@ -1,0 +1,764 @@
+<title>Proposta Núcleo Ímpar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink: #1E2A26;
+    --ink-soft: #55625C;
+    --ink-faint: #7C877F;
+    --paper: #F6F4EF;
+    --surface: #FFFFFF;
+    --surface-alt: #EEEBE1;
+    --accent: #3D6B5C;
+    --accent-strong: #26463B;
+    --accent-soft: #E3EAE4;
+    --line: #DBD6C9;
+    --brass: #9C7A3B;
+    --brass-soft: #F1E7D2;
+    --shadow: 0 1px 2px rgba(30,42,38,0.06), 0 8px 24px -12px rgba(30,42,38,0.18);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink: #EAE7DE;
+      --ink-soft: #ABB6AF;
+      --ink-faint: #7C8981;
+      --paper: #131B19;
+      --surface: #1A2422;
+      --surface-alt: #202B28;
+      --accent: #82B6A0;
+      --accent-strong: #A6D2BE;
+      --accent-soft: #21302A;
+      --line: #2B3733;
+      --brass: #D6B472;
+      --brass-soft: #2A2417;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --ink: #EAE7DE;
+    --ink-soft: #ABB6AF;
+    --ink-faint: #7C8981;
+    --paper: #131B19;
+    --surface: #1A2422;
+    --surface-alt: #202B28;
+    --accent: #82B6A0;
+    --accent-strong: #A6D2BE;
+    --accent-soft: #21302A;
+    --line: #2B3733;
+    --brass: #D6B472;
+    --brass-soft: #2A2417;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ -webkit-text-size-adjust: 100%; }
+
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Libre Franklin", "Segoe UI", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  a{ color: var(--accent-strong); }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  h1, h2, h3{
+    font-family: "Fraunces", Georgia, serif;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .shell{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 56px);
+  }
+
+  /* ---------- Cover ---------- */
+
+  .cover{
+    padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 6vw, 64px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .cover-eyebrow{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .cover-eyebrow::before{
+    content: "";
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+
+  .cover h1{
+    font-size: clamp(2.4rem, 5.4vw, 4rem);
+    font-weight: 600;
+    line-height: 1.04;
+    max-width: 18ch;
+  }
+
+  .cover p.lede{
+    margin-top: 22px;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: var(--ink-soft);
+    max-width: 56ch;
+    line-height: 1.55;
+  }
+
+  .cover-meta{
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 780px;
+  }
+  .cover-meta div{
+    background: var(--surface);
+    padding: 16px 20px;
+  }
+  .cover-meta .label{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 6px;
+  }
+  .cover-meta .value{
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .cover-meta .value.placeholder{
+    color: var(--accent-strong);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* ---------- Layout: nav + content ---------- */
+
+  .layout{
+    display: grid;
+    grid-template-columns: 220px minmax(0,1fr);
+    gap: clamp(24px, 4vw, 64px);
+    padding: 48px 0 96px;
+    align-items: start;
+  }
+
+  nav.toc{
+    position: sticky;
+    top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 0.86rem;
+  }
+  nav.toc a{
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 7px 0;
+    border-left: 2px solid transparent;
+    padding-left: 12px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  nav.toc a:hover{ color: var(--ink); border-color: var(--line); }
+
+  main{ min-width: 0; }
+
+  section{
+    padding: 40px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section:last-child{ border-bottom: none; }
+
+  .section-head{
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .section-head h2{
+    font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+    font-weight: 600;
+  }
+  .section-kicker{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  section p{
+    max-width: 68ch;
+    color: var(--ink-soft);
+  }
+  section p + p{ margin-top: 12px; }
+  section p strong{ color: var(--ink); font-weight: 600; }
+
+  ul.plain{
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+    max-width: 68ch;
+  }
+  ul.plain li{
+    position: relative;
+    padding-left: 22px;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  ul.plain li::before{
+    content: "";
+    position: absolute;
+    left: 0; top: 0.6em;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+  }
+  ul.plain li strong{ color: var(--ink); font-weight: 600; }
+
+  /* card grids */
+  .grid-cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+    margin-top: 22px;
+  }
+  .card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-shadow: var(--shadow);
+  }
+  .card h3{
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .card p{ font-size: 0.92rem; margin: 0; max-width: none; }
+  .card .tag{
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  /* base tecnológica pills */
+  .pillbar{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .pill{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.76rem;
+    padding: 5px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+  }
+
+  /* roadmap */
+  .roadmap{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .phase{
+    display: grid;
+    grid-template-columns: 64px minmax(0,1fr);
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .phase:first-child{ border-top: none; padding-top: 4px; }
+  .phase-num{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1.6rem;
+    color: var(--accent);
+    line-height: 1;
+    padding-top: 4px;
+  }
+  .phase h3{
+    font-size: 1.12rem;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .phase .duration{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.74rem;
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .phase p{ margin-top: 8px; font-size: 0.94rem; }
+  .phase ul.plain{ margin-top: 10px; }
+  .phase ul.plain li{ font-size: 0.92rem; margin-bottom: 6px; }
+
+  /* pricing */
+  .price-hero{
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 22px 0 6px;
+    flex-wrap: wrap;
+  }
+  .price-hero .amount{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 500;
+    color: var(--brass);
+    font-variant-numeric: tabular-nums;
+  }
+  .price-hero .unit{
+    font-size: 1rem;
+    color: var(--ink-faint);
+  }
+  .price-note{
+    background: var(--brass-soft);
+    border: 1px solid color-mix(in srgb, var(--brass) 35%, transparent);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 18px;
+    max-width: 68ch;
+  }
+  .price-note p{ margin: 0; color: var(--ink); font-size: 0.94rem; max-width: none; }
+
+  table.cost{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 0.92rem;
+  }
+  .table-wrap{ overflow-x: auto; margin-top: 24px; }
+  table.cost th, table.cost td{
+    text-align: left;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  table.cost th{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  table.cost td.num{
+    font-family: "IBM Plex Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+  }
+  table.cost tr.total td{
+    font-weight: 600;
+    color: var(--ink);
+    border-bottom: none;
+    border-top: 2px solid var(--ink);
+    padding-top: 14px;
+  }
+
+  @media (max-width: 640px){
+    table.cost thead{ display: none; }
+    table.cost, table.cost tbody, table.cost tr, table.cost td{
+      display: block;
+      width: 100%;
+    }
+    table.cost tr{
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    table.cost tr.total{ border-top: 2px solid var(--ink); }
+    table.cost td{
+      padding: 2px 0;
+      border-bottom: none;
+    }
+    table.cost td[data-label]::before{
+      content: attr(data-label);
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 2px;
+    }
+    table.cost td.num{
+      text-align: left;
+      font-size: 1.02rem;
+    }
+    table.cost tr.total td.num{ font-size: 1.15rem; }
+  }
+
+  /* comms flow */
+  .flow{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .flow .card{ position: relative; }
+
+  /* footer */
+  footer{
+    padding: 40px 0 64px;
+  }
+  footer p{ color: var(--ink-faint); font-size: 0.85rem; }
+  .signoff{
+    font-family: "Fraunces", serif;
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 860px){
+    .layout{ grid-template-columns: 1fr; }
+    nav.toc{
+      position: static;
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 4px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 8px;
+    }
+    nav.toc a{
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      padding: 6px 12px;
+      white-space: nowrap;
+    }
+    .phase{ grid-template-columns: 1fr; gap: 6px; }
+    .phase-num{ font-size: 1.1rem; }
+  }
+</style>
+
+<div class="cover">
+  <div class="shell">
+    <div class="cover-eyebrow">Proposta de parceria</div>
+    <h1>Um sistema de gestão para a clínica, construído junto com quem vai usá-lo.</h1>
+    <p class="lede">Este documento organiza o ponto de partida da parceria: o que já existe hoje, o que muda para atender toda a equipe da clínica, como vamos nos comunicar e o investimento previsto para manter tudo funcionando.</p>
+    <div class="cover-meta">
+      <div>
+        <div class="label">Preparado para</div>
+        <div class="value">Núcleo Ímpar</div>
+      </div>
+      <div>
+        <div class="label">Preparado por</div>
+        <div class="value">Guilherme Andrade</div>
+      </div>
+      <div>
+        <div class="label">Data</div>
+        <div class="value">Agosto de 2026</div>
+      </div>
+      <div>
+        <div class="label">Sistema</div>
+        <div class="value">Psynote</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="shell layout">
+  <nav class="toc" aria-label="Sumário">
+    <a href="#ponto-partida">Ponto de partida</a>
+    <a href="#transformacao">O que muda</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#comunicacao">Comunicação</a>
+    <a href="#investimento">Investimento</a>
+    <a href="#dados">Dados e segurança</a>
+    <a href="#proximos-passos">Próximos passos</a>
+  </nav>
+
+  <main>
+
+    <section id="ponto-partida">
+      <div class="section-head">
+        <h2>De onde estamos partindo</h2>
+      </div>
+      <p>O Psynote já existe: nasceu como um sistema de apoio a psicopedagogos e está em uso real, não é uma ideia no papel. Isso significa menos tempo reconstruindo do zero e mais tempo desenhando o que a clínica precisa de fato.</p>
+      <div class="pillbar">
+        <span class="pill">Cadastro e prontuário de pacientes</span>
+        <span class="pill">Evolução clínica e avaliações</span>
+        <span class="pill">Cobrança e assinaturas automatizadas</span>
+        <span class="pill">Controle financeiro básico</span>
+        <span class="pill">Agenda integrada ao Google e Outlook</span>
+        <span class="pill">Envio de mensagens por WhatsApp</span>
+        <span class="pill">Central de atendimento (em construção)</span>
+      </div>
+      <p style="margin-top:18px">O ponto de atenção honesto: hoje o sistema foi desenhado para o <strong>profissional autônomo</strong> — um psicopedagogo cuidando da própria base de pacientes. A clínica precisa de outra coisa: profissionais de especialidades diferentes, compartilhando a mesma estrutura, cada um enxergando só o que precisa. É essa a transformação central deste projeto.</p>
+    </section>
+
+    <section id="transformacao">
+      <div class="section-head">
+        <h2>O que muda para virar um sistema de clínica</h2>
+      </div>
+      <p>Quatro frentes novas, construídas sobre a base atual em vez de substituí-la:</p>
+      <div class="grid-cards">
+        <div class="card">
+          <span class="tag">Papéis</span>
+          <h3>Equipe multiprofissional</h3>
+          <p>Fisioterapia, terapia ocupacional, psicopedagogia, psicologia e administrativo convivendo no mesmo sistema, cada um com permissões e visões adequadas ao seu papel.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Prontuário</span>
+          <h3>Paciente compartilhado</h3>
+          <p>Um único cadastro de paciente por clínica, com controle de acesso: dado clínico visível para quem atende, dado administrativo visível para quem gerencia.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Especialidades</span>
+          <h3>Módulos clínicos por área</h3>
+          <p>O módulo de psicopedagogia (avaliações, programas, coletas) migra como o primeiro módulo especializado; fisio, TO e psicologia recebem evolução clínica própria, desenhada com cada equipe.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Gestão</span>
+          <h3>Administrativo da clínica</h3>
+          <p>O financeiro deixa de ser "por profissional" e passa a enxergar a clínica como um todo — receitas, repasses e um controle simples de equipe.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap">
+      <div class="section-head">
+        <span class="section-kicker">Sequência de entrega</span>
+        <h2>Roadmap de fases</h2>
+      </div>
+      <p>Como ainda não existe levantamento de requisitos, os prazos abaixo são estimativas de esforço, não datas fechadas. A Fase 0 é o que transforma isso em cronograma real.</p>
+
+      <div class="roadmap">
+        <div class="phase">
+          <div class="phase-num">00</div>
+          <div>
+            <h3>Descoberta e fundação <span class="duration">2–3 semanas</span></h3>
+            <p>Entender como cada especialidade trabalha hoje, antes de desenhar telas.</p>
+            <ul class="plain">
+              <li>Entrevistas curtas com um representante de cada área (fisio, TO, psicopedagogia, psicologia, administrativo)</li>
+              <li>Provisionamento do VPS, domínio, backups e ambiente de produção</li>
+              <li>Configuração do Trello e da pasta compartilhada no Drive</li>
+              <li>Primeira reunião de alinhamento com escopo fechado para a Fase 1</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">01</div>
+          <div>
+            <h3>Fundação multiprofissional <span class="duration">4–6 semanas</span></h3>
+            <p>A clínica passa a existir como estrutura no sistema, não só o profissional individual.</p>
+            <ul class="plain">
+              <li>Perfis de acesso por especialidade e por função administrativa</li>
+              <li>Prontuário de paciente compartilhado, cada profissional vendo só o que precisa</li>
+              <li>Agenda compartilhada entre profissionais e salas</li>
+              <li>Nova interface visual do sistema, mais moderna e fácil de usar</li>
+              <li>Módulo de psicopedagogia adaptado como primeira especialidade ativa</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">02</div>
+          <div>
+            <h3>Especialidades clínicas <span class="duration">4–8 semanas, iterativo</span></h3>
+            <p>Entrega especialidade por especialidade, validando com quem usa antes de seguir para a próxima.</p>
+            <ul class="plain">
+              <li>Evolução clínica genérica para fisioterapia, TO e psicologia</li>
+              <li>Ferramentas e avaliações específicas de cada área, mapeadas na Fase 0</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">03</div>
+          <div>
+            <h3>Administrativo e financeiro da clínica <span class="duration">3–5 semanas</span></h3>
+            <p>De controle individual para visão consolidada da clínica.</p>
+            <ul class="plain">
+              <li>Financeiro adaptado para a clínica como um todo (não mais por profissional)</li>
+              <li>Cadastro de colaboradores e controle simples de RH</li>
+              <li>Modelo de repasse/faturamento, se aplicável à estrutura da clínica</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">04</div>
+          <div>
+            <h3>Automação e suporte <span class="duration">contínuo</span></h3>
+            <p>O sistema passa a fazer trabalho repetitivo sozinho.</p>
+            <ul class="plain">
+              <li>Lembretes automáticos de agenda</li>
+              <li>Confirmação e lembrete de consulta enviados por WhatsApp direto para o paciente</li>
+              <li>Central de chamados disponibilizada como canal oficial de suporte da clínica</li>
+            </ul>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num">05</div>
+          <div>
+            <h3>Estabilização <span class="duration">2–3 semanas</span></h3>
+            <p>Fechar o ciclo com confiança operacional, não só funcionalidade.</p>
+            <ul class="plain">
+              <li>Verificação constante de que o sistema está disponível</li>
+              <li>Teste real de recuperação em caso de falha grave</li>
+              <li>Documentação de uso entregue à clínica</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comunicacao">
+      <div class="section-head">
+        <h2>Como vamos nos comunicar</h2>
+      </div>
+      <p>Três canais, cada um com um trabalho específico — para que decisão, dúvida e avanço técnico não se misturem no mesmo lugar.</p>
+      <div class="flow">
+        <div class="card">
+          <span class="tag">A cada 15–30 dias</span>
+          <h3>Reunião de alinhamento</h3>
+          <p>Com o responsável pela clínica, para revisar entregas, priorizar o próximo bloco e decidir sobre pontos em aberto. Reuniões extraordinárias sempre que necessário.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Trello</span>
+          <h3>Quadro compartilhado + quadro de sprint</h3>
+          <p>Um quadro aberto a toda a equipe para sugestões e chamados de melhoria. Um quadro interno, só meu, onde esses pedidos viram sprints organizadas tecnicamente.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Google Drive</span>
+          <h3>Pasta compartilhada</h3>
+          <p>Protocolos clínicos, atas de reunião, documentos institucionais e contratos — tudo em um único lugar, acessível a quem precisar.</p>
+        </div>
+      </div>
+      <p style="margin-top:20px;font-size:0.9rem">Um grupo de WhatsApp fica reservado para avisos urgentes (ex.: sistema fora do ar) — decisões de produto sempre ficam registradas no Trello ou no Drive, para não se perderem na conversa.</p>
+    </section>
+
+    <section id="investimento">
+      <div class="section-head">
+        <h2>Investimento nesta fase</h2>
+      </div>
+      <p>Nesta fase, o meu trabalho de desenvolvimento não é cobrado: o meu ganho aqui é colocar o sistema em uso real, com uma clínica de verdade. O que a clínica sustenta é exclusivamente o custo de manter o sistema no ar — servidor, backup e endereço na internet.</p>
+
+      <div class="price-hero">
+        <span class="amount">R$ 180</span>
+        <span class="unit">/ mês — manutenção e infraestrutura</span>
+      </div>
+
+      <div class="table-wrap">
+        <table class="cost">
+          <thead>
+            <tr><th>Item</th><th>Descrição</th><th>Custo real</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Item">Servidor</td>
+              <td data-label="Descrição">Onde o sistema roda 24h por dia (cotação Hostinger, valor de renovação)</td>
+              <td class="num" data-label="Custo real">R$ 108,99/mês</td>
+            </tr>
+            <tr>
+              <td data-label="Item">Backup diário</td>
+              <td data-label="Descrição">Cópia de segurança automática de todos os dados, todos os dias</td>
+              <td class="num" data-label="Custo real">R$ 32,99/mês</td>
+            </tr>
+            <tr>
+              <td data-label="Item">Endereço na internet</td>
+              <td data-label="Descrição">Domínio próprio da clínica (ex.: nucleoimpar.com.br), registro anual</td>
+              <td class="num" data-label="Custo real">R$ 40,00/ano</td>
+            </tr>
+            <tr>
+              <td data-label="Item">Segurança (certificado)</td>
+              <td data-label="Descrição">Criptografia da conexão, obrigatória para dado de saúde</td>
+              <td class="num" data-label="Custo real">Sem custo</td>
+            </tr>
+            <tr>
+              <td data-label="Item">Envio de e-mails e verificação do sistema</td>
+              <td data-label="Descrição">Notificações automáticas e checagem de que tudo está no ar</td>
+              <td class="num" data-label="Custo real">Sem custo nesta fase</td>
+            </tr>
+            <tr class="total">
+              <td data-label="Item">Total real recorrente</td>
+              <td></td>
+              <td class="num" data-label="Custo real">≈ R$ 145,31/mês</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-note">
+        <p>O primeiro mês de servidor costuma vir com desconto promocional (a cotação atual mostra R$ 70,99 no primeiro mês, renovando depois a R$ 108,99) — o valor real usado aqui já é o de renovação, para não haver surpresa depois. <strong>R$ 180/mês</strong> cobre esse custo com uma margem pequena, para reajustes de preço e o tempo dedicado a manter o sistema funcionando — não é cobrança por desenvolvimento. Novas funcionalidades continuam sendo o meu investimento nesta fase de parceria. Ao final dela, revisamos juntos se e como o modelo comercial evolui, com o sistema já validado em uso real.</p>
+        <p style="margin-top:12px">O servidor contratado já tem capacidade confortável para o uso previsto da clínica. Mesmo assim, se o crescimento da equipe algum dia exigir mais capacidade, esse valor é revisado com a fatura real mostrada para o Núcleo Ímpar antes de qualquer ajuste — nunca um reajuste sem explicação.</p>
+      </div>
+    </section>
+
+    <section id="dados">
+      <div class="section-head">
+        <h2>Dados e segurança</h2>
+      </div>
+      <p>Prontuário é dado sensível — a plataforma trata isso como requisito, não como extra.</p>
+      <ul class="plain">
+        <li><strong>Isolamento por clínica:</strong> o sistema já garante, por construção, que os dados do Núcleo Ímpar nunca se misturam com os de outra clínica.</li>
+        <li><strong>Controle de acesso por profissional:</strong> cada um vê o que precisa para atender — não o prontuário completo de todos os pacientes da clínica.</li>
+        <li><strong>Backups regulares</strong> com teste periódico de restauração, não apenas cópia armazenada.</li>
+        <li><strong>Conformidade com a LGPD</strong> como princípio de design para qualquer dado de saúde tratado pelo sistema.</li>
+      </ul>
+    </section>
+
+    <section id="proximos-passos">
+      <div class="section-head">
+        <h2>Próximos passos</h2>
+      </div>
+      <p>Para iniciar a Fase 0, precisamos de três coisas da clínica:</p>
+      <ul class="plain">
+        <li><strong>Um representante por especialidade</strong> disponível para uma conversa de 30–40 minutos sobre como trabalha hoje.</li>
+        <li><strong>Validação do domínio e da identidade</strong> que o sistema vai usar publicamente.</li>
+        <li><strong>Aceite deste documento</strong> como ponto de partida — ele será revisado a cada reunião de alinhamento, não é um contrato fechado.</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="shell">
+    <div class="signoff">Guilherme Andrade</div>
+    <p>Sistema Psynote · Documento vivo — atualizado a cada ciclo de alinhamento com o Núcleo Ímpar.</p>
+  </div>
+</footer>
