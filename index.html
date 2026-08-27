@@ -456,23 +456,95 @@
 
   @media (max-width: 860px){
     .layout{ grid-template-columns: 1fr; }
+
+    /* nav: text list becomes a scrollable chip bar, with a fade hint at the edge */
     nav.toc{
       position: static;
       flex-direction: row;
       overflow-x: auto;
-      gap: 4px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 8px;
+      gap: 8px;
+      padding: 2px 20px 14px 2px;
+      margin: 0 -2px 20px;
+      -webkit-mask-image: linear-gradient(to right, black calc(100% - 28px), transparent);
+      mask-image: linear-gradient(to right, black calc(100% - 28px), transparent);
+      scrollbar-width: none;
     }
+    nav.toc::-webkit-scrollbar{ display: none; }
     nav.toc a{
-      border-left: none;
-      border-bottom: 2px solid transparent;
-      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 16px;
       white-space: nowrap;
+      background: var(--surface);
+      font-size: 0.82rem;
     }
-    .phase{ grid-template-columns: 1fr; gap: 6px; }
-    .phase-num{ font-size: 1.1rem; }
+    nav.toc a:hover{ background: var(--accent-soft); border-color: var(--accent); }
+  }
+
+  @media (max-width: 640px){
+    .shell{ padding: 0 20px; }
+    section{ padding: 32px 0; }
+
+    /* cover metadata: boxed grid → a plain, right-aligned fact list */
+    .cover-meta{
+      display: block;
+      background: none;
+      border: none;
+      border-top: 1px solid var(--line);
+      border-radius: 0;
+      max-width: none;
+    }
+    .cover-meta div{
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      background: none;
+    }
+    .cover-meta .label{ margin-bottom: 0; }
+    .cover-meta .value{ text-align: right; }
+
+    /* roadmap: side-by-side grid → vertical timeline with connecting line */
+    .roadmap{ position: relative; padding-left: 40px; }
+    .roadmap::before{
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: var(--line);
+    }
+    .phase{
+      display: block;
+      position: relative;
+      grid-template-columns: none;
+      padding: 0 0 28px;
+      border-top: none;
+    }
+    .phase:first-child{ padding-top: 0; }
+    .phase:last-child{ padding-bottom: 0; }
+    .phase-num{
+      position: absolute;
+      left: -40px;
+      top: 2px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--surface);
+      font-size: 0.78rem;
+      line-height: 1;
+      padding-top: 0;
+    }
+
+    .grid-cards, .flow{ grid-template-columns: 1fr; }
+    .card{ padding: 16px 18px; }
   }
 </style>
 
