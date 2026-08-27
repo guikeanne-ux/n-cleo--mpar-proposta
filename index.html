@@ -56,7 +56,7 @@
   }
 
   *{ box-sizing: border-box; }
-  html{ -webkit-text-size-adjust: 100%; }
+  html{ -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
   body{
     margin: 0;
@@ -69,6 +69,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
     *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
   }
 
@@ -403,35 +404,69 @@
   }
 
   @media (max-width: 640px){
+    .table-wrap{ overflow-x: visible; }
     table.cost thead{ display: none; }
-    table.cost, table.cost tbody, table.cost tr, table.cost td{
-      display: block;
-      width: 100%;
-    }
+    table.cost, table.cost tbody{ display: block; width: 100%; }
     table.cost tr{
-      padding: 14px 0;
-      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 15px 18px;
+      margin-top: 24px;
+      box-shadow: var(--shadow);
     }
-    table.cost tr.total{ border-top: 2px solid var(--ink); }
+    table.cost tr:first-child{ margin-top: 0; }
     table.cost td{
-      padding: 2px 0;
+      display: block;
+      width: auto;
+      padding: 0;
       border-bottom: none;
     }
-    table.cost td[data-label]::before{
-      content: attr(data-label);
-      display: block;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 2px;
+    table.cost td:empty{ display: none; }
+    table.cost td:first-child{
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.98rem;
+    }
+    table.cost td:nth-child(2){
+      margin-top: 4px;
+      color: var(--ink-soft);
+      font-size: 0.86rem;
+      line-height: 1.5;
     }
     table.cost td.num{
+      margin-top: 10px;
       text-align: left;
-      font-size: 1.02rem;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--accent-strong);
     }
-    table.cost tr.total td.num{ font-size: 1.15rem; }
+
+    /* the total row is the number that matters most — it gets the spotlight */
+    table.cost tr.total{
+      background: var(--brass-soft);
+      border-color: var(--brass);
+      box-shadow: 0 0 0 1px var(--brass), var(--shadow);
+    }
+    table.cost tr.total td:first-child{
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      font-weight: 500;
+    }
+    table.cost tr.total td.num{
+      margin-top: 6px;
+      font-family: "IBM Plex Mono", monospace;
+      font-variant-numeric: tabular-nums;
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: var(--brass);
+    }
   }
 
   /* comms flow */
@@ -465,7 +500,7 @@
       overflow-x: auto;
       gap: 8px;
       padding: 2px 20px 14px 2px;
-      margin: 0 -2px 20px;
+      margin: 24px -2px 20px;
       -webkit-mask-image: linear-gradient(to right, black calc(100% - 28px), transparent);
       mask-image: linear-gradient(to right, black calc(100% - 28px), transparent);
       scrollbar-width: none;
@@ -762,34 +797,29 @@
           </thead>
           <tbody>
             <tr>
-              <td data-label="Item">Servidor</td>
-              <td data-label="Descrição">Onde o sistema roda 24h por dia (cotação Hostinger, valor de renovação)</td>
-              <td class="num" data-label="Custo real">R$ 108,99/mês</td>
+              <td>Servidor</td>
+              <td>Onde o sistema roda 24h por dia (cotação Hostinger, valor de renovação)</td>
+              <td class="num">R$ 108,99/mês</td>
             </tr>
             <tr>
-              <td data-label="Item">Backup diário</td>
-              <td data-label="Descrição">Cópia de segurança automática de todos os dados, todos os dias</td>
-              <td class="num" data-label="Custo real">R$ 32,99/mês</td>
+              <td>Backup diário</td>
+              <td>Cópia de segurança automática de todos os dados, todos os dias</td>
+              <td class="num">R$ 32,99/mês</td>
             </tr>
             <tr>
-              <td data-label="Item">Endereço na internet</td>
-              <td data-label="Descrição">Domínio próprio da clínica (ex.: nucleoimpar.com.br), registro anual</td>
-              <td class="num" data-label="Custo real">R$ 40,00/ano</td>
+              <td>Endereço na internet</td>
+              <td>Domínio próprio da clínica (ex.: nucleoimpar.com.br), registro anual</td>
+              <td class="num">R$ 40,00/ano</td>
             </tr>
             <tr>
-              <td data-label="Item">Segurança (certificado)</td>
-              <td data-label="Descrição">Criptografia da conexão, obrigatória para dado de saúde</td>
-              <td class="num" data-label="Custo real">Sem custo</td>
-            </tr>
-            <tr>
-              <td data-label="Item">Envio de e-mails e verificação do sistema</td>
-              <td data-label="Descrição">Notificações automáticas e checagem de que tudo está no ar</td>
-              <td class="num" data-label="Custo real">Sem custo nesta fase</td>
+              <td>Certificado de segurança e notificações</td>
+              <td>Criptografia da conexão e envio automático de e-mails do sistema</td>
+              <td class="num">Sem custo nesta fase</td>
             </tr>
             <tr class="total">
-              <td data-label="Item">Total real recorrente</td>
+              <td>Total real recorrente</td>
               <td></td>
-              <td class="num" data-label="Custo real">≈ R$ 145,31/mês</td>
+              <td class="num">≈ R$ 145,31/mês</td>
             </tr>
           </tbody>
         </table>
