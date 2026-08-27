@@ -445,27 +445,26 @@
       color: var(--accent-strong);
     }
 
-    /* the total row is the number that matters most — it gets the spotlight */
+    /* this is a reference subtotal, not the price charged — kept quiet on purpose so
+       it never competes with the R$ 180 figure above the table */
     table.cost tr.total{
-      background: var(--brass-soft);
-      border-color: var(--brass);
-      box-shadow: 0 0 0 1px var(--brass), var(--shadow);
+      background: var(--surface-alt);
+      border-color: var(--line);
+      border-style: dashed;
+      box-shadow: none;
     }
     table.cost tr.total td:first-child{
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
+      font-size: 0.86rem;
+      color: var(--ink-soft);
       font-weight: 500;
     }
     table.cost tr.total td.num{
       margin-top: 6px;
       font-family: "IBM Plex Mono", monospace;
       font-variant-numeric: tabular-nums;
-      font-size: 1.7rem;
-      font-weight: 500;
-      color: var(--brass);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
     }
   }
 
@@ -787,8 +786,10 @@
 
       <div class="price-hero">
         <span class="amount">R$ 180</span>
-        <span class="unit">/ mês — manutenção e infraestrutura</span>
+        <span class="unit">/ mês — valor cobrado da clínica</span>
       </div>
+
+      <p style="margin-top:22px">De onde vem esse número — a conta aberta, sem letra miúda:</p>
 
       <div class="table-wrap">
         <table class="cost">
@@ -817,7 +818,7 @@
               <td class="num">Sem custo nesta fase</td>
             </tr>
             <tr class="total">
-              <td>Total real recorrente</td>
+              <td>Soma do custo real (não é o valor cobrado)</td>
               <td></td>
               <td class="num">≈ R$ 145,31/mês</td>
             </tr>
