@@ -830,6 +830,49 @@
         <p>O primeiro mês de servidor costuma vir com desconto promocional (a cotação atual mostra R$ 70,99 no primeiro mês, renovando depois a R$ 108,99) — o valor real usado aqui já é o de renovação, para não haver surpresa depois. <strong>R$ 180/mês</strong> cobre esse custo com uma margem pequena, para reajustes de preço e o tempo dedicado a manter o sistema funcionando — não é cobrança por desenvolvimento. Novas funcionalidades continuam sendo o meu investimento nesta fase de parceria. Ao final dela, revisamos juntos se e como o modelo comercial evolui, com o sistema já validado em uso real.</p>
         <p style="margin-top:12px">O servidor contratado já tem capacidade confortável para o uso previsto da clínica. Mesmo assim, se o crescimento da equipe algum dia exigir mais capacidade, esse valor é revisado com a fatura real mostrada para o Núcleo Ímpar antes de qualquer ajuste — nunca um reajuste sem explicação.</p>
       </div>
+
+      <h3 style="margin-top:32px;font-size:1.05rem;font-weight:600">Se a clínica quiser anexar documentos (exames, laudos, imagens)</h3>
+      <p style="margin-top:10px">Essa é uma possível funcionalidade futura, ainda a confirmar com a clínica — arquivos de paciente não ficam guardados no mesmo servidor do sistema, e sim num serviço de armazenamento em nuvem especializado (Cloudflare R2), separado de propósito para não colocar em risco a estabilidade do servidor principal.</p>
+      <p style="margin-top:10px">No volume esperado da clínica, esse serviço fica dentro da faixa gratuita oferecida pelo provedor. Sendo honesto: <strong>faixa gratuita não é uma garantia permanente</strong> — se o provedor mudar as condições, ou se o volume de arquivos crescer além do previsto, passa a existir um custo. Os valores reais, publicados pelo provedor hoje, são:</p>
+
+      <div class="table-wrap">
+        <table class="cost">
+          <thead>
+            <tr><th>Item</th><th>Descrição</th><th>Custo real</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Armazenamento</td>
+              <td>Primeiros 10GB de arquivos guardados, todo mês</td>
+              <td class="num">Sem custo</td>
+            </tr>
+            <tr>
+              <td>Armazenamento acima de 10GB</td>
+              <td>Cada GB adicional guardado, por mês</td>
+              <td class="num">≈ R$ 0,08/GB</td>
+            </tr>
+            <tr>
+              <td>Enviar/organizar arquivos</td>
+              <td>Faixa gratuita cobre 1 milhão de envios por mês — muito acima do uso esperado da clínica</td>
+              <td class="num">Sem custo previsto</td>
+            </tr>
+            <tr>
+              <td>Baixar/visualizar arquivos</td>
+              <td>Sem limite, sempre gratuito nesse provedor específico</td>
+              <td class="num">Sem custo</td>
+            </tr>
+            <tr class="total">
+              <td>Exemplo: se acumular 50GB de arquivos</td>
+              <td></td>
+              <td class="num">≈ R$ 3,20/mês</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-note">
+        <p>Valores em dólar convertidos pela cotação de hoje (28/08/2026, ≈ R$ 5,16). Como é uma cotação internacional, pode variar um pouco mês a mês — mas mesmo assim, no volume de uma clínica desse porte, o impacto é pequeno. Se esse custo algum dia aparecer, ele segue a mesma regra do restante: revisado com você antes de qualquer cobrança nova.</p>
+      </div>
     </section>
 
     <section id="dados">
