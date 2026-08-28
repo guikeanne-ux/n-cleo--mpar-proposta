@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Andamento Núcleo Ímpar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink: #1E2A26;
+    --ink-soft: #55625C;
+    --ink-faint: #7C877F;
+    --paper: #F6F4EF;
+    --surface: #FFFFFF;
+    --surface-alt: #EEEBE1;
+    --accent: #3D6B5C;
+    --accent-strong: #26463B;
+    --accent-soft: #E3EAE4;
+    --line: #DBD6C9;
+    --brass: #9C7A3B;
+    --brass-soft: #F1E7D2;
+    --shadow: 0 1px 2px rgba(30,42,38,0.06), 0 8px 24px -12px rgba(30,42,38,0.18);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink: #EAE7DE;
+      --ink-soft: #ABB6AF;
+      --ink-faint: #7C8981;
+      --paper: #131B19;
+      --surface: #1A2422;
+      --surface-alt: #202B28;
+      --accent: #82B6A0;
+      --accent-strong: #A6D2BE;
+      --accent-soft: #21302A;
+      --line: #2B3733;
+      --brass: #D6B472;
+      --brass-soft: #2A2417;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+
+  :root[data-theme="dark"]{
+    --ink: #EAE7DE;
+    --ink-soft: #ABB6AF;
+    --ink-faint: #7C8981;
+    --paper: #131B19;
+    --surface: #1A2422;
+    --surface-alt: #202B28;
+    --accent: #82B6A0;
+    --accent-strong: #A6D2BE;
+    --accent-soft: #21302A;
+    --line: #2B3733;
+    --brass: #D6B472;
+    --brass-soft: #2A2417;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Libre Franklin", "Segoe UI", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  a{ color: var(--accent-strong); }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  h1, h2{
+    font-family: "Fraunces", Georgia, serif;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .shell{
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 56px);
+  }
+
+  .back-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+  .back-link:hover{ color: var(--accent-strong); }
+
+  header.page{
+    padding: clamp(40px, 7vw, 72px) 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  header.page h1{
+    margin-top: 22px;
+    font-size: clamp(2rem, 4.5vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.08;
+  }
+  header.page p.lede{
+    margin-top: 16px;
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+  .log{
+    padding: 48px 0 80px;
+    position: relative;
+    padding-left: 40px;
+  }
+  .log::before{
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--line);
+  }
+  .log-entry{
+    position: relative;
+    padding-bottom: 32px;
+  }
+  .log-entry:last-child{ padding-bottom: 0; }
+  .log-entry::before{
+    content: "";
+    position: absolute;
+    left: -40px;
+    top: 2px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--paper);
+  }
+  .log-entry::after{
+    content: "";
+    position: absolute;
+    left: -32px;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='3,8 6.5,12 13,4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .log-date{
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+    margin-bottom: 6px;
+  }
+  .log-entry h2{
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+  .log-entry p{
+    margin-top: 8px;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-width: 56ch;
+  }
+
+  footer{
+    padding: 0 0 64px;
+    border-top: 1px solid var(--line);
+    padding-top: 32px;
+  }
+  footer p{ color: var(--ink-faint); font-size: 0.85rem; margin: 0; }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header class="page">
+    <a class="back-link" href="index.html">← Voltar para a proposta</a>
+    <h1>Andamento da parceria</h1>
+    <p class="lede">Registro simples de cada marco desta parceria, em ordem — pra você acompanhar sem precisar perguntar.</p>
+  </header>
+
+  <div class="log">
+    <div class="log-entry">
+      <span class="log-date">28 de agosto de 2026</span>
+      <h2>Primeira mensalidade recebida</h2>
+      <p>Pagamento de R$ 180 confirmado via Pix, referente à manutenção e infraestrutura do sistema neste mês.</p>
+    </div>
+    <div class="log-entry">
+      <span class="log-date">28 de agosto de 2026</span>
+      <h2>Canais de comunicação abertos</h2>
+      <p>O quadro de pedidos e a pasta de documentos compartilhados já estão prontos para uso da equipe.</p>
+    </div>
+    <div class="log-entry">
+      <span class="log-date">27 de agosto de 2026</span>
+      <h2>Parceria aceita</h2>
+      <p>Primeira reunião de alinhamento e aceite da proposta de parceria.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Guilherme Andrade · Sistema Psynote · Página atualizada a cada marco relevante.</p>
+  </footer>
+</div>
+
+</body>
+</html>
