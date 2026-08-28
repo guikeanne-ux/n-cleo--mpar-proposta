@@ -368,6 +368,28 @@
   }
   .price-note p{ margin: 0; color: var(--ink); font-size: 0.94rem; max-width: none; }
 
+  /* same weight as price-note, different hue on purpose — this is a caveat about
+     time, not money, and the two must never be confused at a glance */
+  .alert-note{
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 18px;
+    max-width: 68ch;
+  }
+  .alert-note .alert-kicker{
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent-strong);
+    margin-bottom: 6px;
+  }
+  .alert-note p{ margin: 0; color: var(--ink); font-size: 0.94rem; max-width: none; }
+  .alert-note p + p{ margin-top: 8px; }
+
   table.cost{
     width: 100%;
     border-collapse: collapse;
@@ -678,7 +700,11 @@
         <span class="section-kicker">Sequência de entrega</span>
         <h2>Roadmap de fases</h2>
       </div>
-      <p>Como ainda não existe levantamento de requisitos, os prazos abaixo são estimativas de esforço, não datas fechadas. A Fase 0 é o que transforma isso em cronograma real.</p>
+      <div class="alert-note">
+        <span class="alert-kicker">Antes de ler os prazos</span>
+        <p>Os números de cada fase são uma estimativa de esforço, não uma promessa fechada. Ainda não temos clareza suficiente pra travar datas — não existe levantamento de requisitos, isso só acontece na Fase 0.</p>
+        <p>Além disso, o trabalho depende de gente, não só de código: preciso conversar com cada profissional da equipe, esperar retorno da clínica em pontos que só ela sabe responder, e lidar com informações externas fora do meu controle. Imprevisto acontece. Os prazos são revisados a cada reunião de alinhamento, conforme a realidade real aparece — não são lei.</p>
+      </div>
 
       <div class="roadmap">
         <div class="phase">
